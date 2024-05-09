@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<form method='POST'>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type='hidden' name='next' value="{{ request.GET.next }}"> {# URLのnext=以降のURLを取得、postリクエスト時にいっしょに投げる #}
+    <input type='submit' value="ログイン">
+</form>
+{% endblock %}

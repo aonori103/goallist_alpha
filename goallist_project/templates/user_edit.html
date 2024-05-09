@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<form method='POST' enctype='multipart/form-data'>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type='submit' value="設定変更"><br>
+    <a class='navbar-brand' href="{% url 'accounts:home' %}">ホームへ戻る</a>
+</form>
+{% if user.picture %}
+    <img src='{{ user.picture.url }}'>
+{% endif %}
+{% endblock %}

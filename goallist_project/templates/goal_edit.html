@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<form method='POST'>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type='submit' value="変更">
+</form>
+<a href="{% url 'accounts:goal_list' %}">リストへ戻る</a>
+{% endblock %}

@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% block content %}
+
+{% load static %}
+    <h1>User Profile</h1>
+    <img src="{% static 'cat.png' %}">
+<a href="{% url 'accounts:goal_list' %}">リストへ戻る</a>
+{% endblock %}

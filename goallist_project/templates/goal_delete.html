@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<form method='POST'>
+<h3>{{ object.goal_title }}</h3>
+<div>この夢を削除しますか？</div>
+{% csrf_token %}
+<input type='submit' value="削除">
+</form>
+<a href="{% url 'accounts:goal_list' %}">リストへ戻る</a>
+{% endblock %}
