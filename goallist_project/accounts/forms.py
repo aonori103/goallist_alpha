@@ -5,7 +5,7 @@ from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth.forms import AuthenticationForm
 
 class RegistForm(forms.ModelForm):
-    username = forms.CharField(label='ユーザー名', help_text='30字以内で入力してください', max_length=30)
+    username = forms.CharField(label='ユーザー名', help_text='10字以内で入力してください', max_length=10)
     address = forms.EmailField(label='メールアドレス')
     password = forms.CharField(label='パスワード', help_text='30字以内で入力してください', max_length=30, widget=forms.PasswordInput())
     confirm_password = forms.CharField(label='パスワード再入力', help_text='30字以内で入力してください', max_length=30, widget=forms.PasswordInput())
@@ -61,8 +61,8 @@ class UserEditForm(forms.ModelForm):
     
     # 夢編集用画面とフォーム作る。
 class GoalRegistForm(forms.ModelForm):
-    goal_title = forms.CharField(label='叶えたい夢', max_length=50)
-    goal_detail = forms.CharField(label='夢の詳細', max_length=300, required=False)
+    goal_title = forms.CharField(label='叶えたい夢', max_length=15)
+    goal_detail = forms.CharField(label='夢の詳細', max_length=30, required=False)
     
     class Meta:
         model = Goals
@@ -98,6 +98,7 @@ class TaskRegistForm(forms.ModelForm):
     task_title = forms.CharField(label='タスク', max_length=50)
     task_priority = forms.IntegerField(label='優先順位', initial=False)
     task_due = forms.DateField(label='期限', initial='2000-01-01',required=False)
+    goals = forms.IntegerField(widget=forms.HiddenInput)
     
     class Meta:
         model = Tasks
@@ -113,7 +114,7 @@ class TaskRegistForm(forms.ModelForm):
 
 
 class TaskUpdateForm(forms.ModelForm):
-    task_title = forms.CharField(label='タスク', initial=Tasks.task_title, max_length=20)
+    task_title = forms.CharField(label='タスク', initial=Tasks.task_title, max_length=50)
     task_condition = forms.BooleanField(label='進捗', initial=False, required=False)
     task_priority = forms.IntegerField(label='優先順位', initial=Tasks.task_priority)
     task_due = forms.DateField(label='期限', initial=Tasks.task_due, required=False)

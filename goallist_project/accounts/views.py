@@ -149,12 +149,12 @@ class GoalDetailView(View, LoginRequiredMixin):
     def get(self, request, pk, **kwargs):
         context = {}
         context["goal"] = Goals.objects.filter(id=pk).first()
-        context["tasks"] = Tasks.objects.filter(goals_id=pk)
+        # context["tasks"] = Tasks.objects.filter(goals_id=pk)
         
-        count_task = Tasks.objects.filter(goals_id=pk).count()
-        count_clear = Tasks.objects.filter(task_condition=True).count()
+        # count_task = Tasks.objects.filter(goals_id=pk).count()
+        # count_clear = Tasks.objects.filter(task_condition=True).count()
         obj = Goals.objects.filter(id=pk).first()
-        obj.goal_condition = int(count_clear / count_task *100)
+        # obj.goal_condition = int(count_clear / count_task *100)
         obj.save()
         return render(request, "goal_detail.html", context)
     
@@ -163,11 +163,17 @@ class GoalDetailView(View, LoginRequiredMixin):
 class TaskRegistView(CreateView, LoginRequiredMixin):
 
     def get(self, request, pk, *args, **kwargs):
-
+        
         context = {}
-        context["taskregistform"] = TaskRegistForm(request.POST or None, request.FILES or None)
-        context["goal"] = Goals.objects.filter(id=pk).first()
+        
+        goal = Goals.objects.filter(id=pk).first()
+        # context["taskregistform"] = TaskRegistForm(request.POST or None, request.FILES or None, initial={"goal", goal})
+        context["taskregistform"] = TaskRegistForm(initial={"goal", goal})
+        context["goal"] = goal
         context["tasks"] = Tasks.objects.filter(goals_id=pk)
+            
+        form = TaskRegistForm()
+        context["taskregistform"] = form
 
         return render(request,"task_regist.html",context)
 

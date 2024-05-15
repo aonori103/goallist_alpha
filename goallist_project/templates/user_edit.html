@@ -1,12 +1,58 @@
 {% extends 'base.html' %}
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+
+<body>
 {% block content %}
-<form method='POST' enctype='multipart/form-data'>
+<div style="height: 400px; display: flex; justify-content: center; align-items: center;">
+<form method='POST' enctype='multipart/form-data' style="max-width:300px;margin:auto">
     {% csrf_token %}
-    {{ form.as_p }}
+            <h1 class="h3 mb-3 fw-normal">ユーザー情報編集</h1>
+
+            <div class="form-group">
+                <p style="font-size: 16px; font-weight: bold; border-left: solid 5px #7db4e6; padding: 0.25em 0.5em; margin: 10px 0px 5px -10px; background: #c2edff;">ユーザー名</p>
+                <input class="form-control" type="text" placeholder="10字以内" size="10"
+                name="{{ form.username.html_name }}" value="{{ users.username }}"
+                autocomplete="{{ form.username.html_name }}" maxlength="10"
+                id="{{ form.username.id_for_label }}">
+            </div>
+
+            <div class="form-group">
+                <p style="font-size: 16px; font-weight: bold; border-left: solid 5px #7db4e6; padding: 0.25em 0.5em; margin: 10px 0px 5px -10px; background: #c2edff;">メールアドレス</p>
+                <input class="form-control" type="email" placeholder="xxx@mail.com"
+                name="{{ form.address.html_name }}" value="{{ users.address }}"
+                autocomplete="{{ form.address.html_name }}"
+                id="{{ form.address.id_for_label }}">
+            </div>
+
+            <div class="form-group">
+                <p style="font-size: 16px; font-weight: bold; border-left: solid 5px #7db4e6; padding: 0.25em 0.5em; margin: 10px 0px 5px -10px; background: #c2edff;">職業</p>
+                <input class="form-control" type="text" placeholder="会社員"
+                name="{{ form.job.html_name }}" value="{{ users.job }}"
+                autocomplete="{{ form.job.html_name }}"
+                id="{{ form.job.id_for_label }}">
+            </div>
+            
+            <div class="form-group">
+                <p style="font-size: 16px; font-weight: bold; border-left: solid 5px #7db4e6; padding: 0.25em 0.5em; margin: 10px 0px 5px -10px; background: #c2edff;">簡単な自己紹介</p>
+                <input class="form-control" type="text" placeholder="15字以内" size="15"
+                name="{{ form.introduction.html_name }}" value="{{ users.introduction }}"
+                autocomplete="{{ form.introduction.html_name }}" maxlength="15"
+                id="{{ form.introduction.id_for_label }}">
+            </div>
+            
+            <div class="form-group">
+                <p style="font-size: 16px; font-weight: bold; border-left: solid 5px #7db4e6; padding: 0.25em 0.5em; margin: 10px 0px 5px -10px; background: #c2edff;">誕生日</p>
+                <input class="form-control" type="date"
+                name="{{ form.birthday.html_name }}" value="{{ users.birthday }}"
+                autocomplete="{{ form.birthday.html_name }}"
+                id="{{ form.birthday.id_for_label }}">
+            </div>
+
     <input type='submit' value="設定変更"><br>
     <a class='navbar-brand' href="{% url 'accounts:home' %}">ホームへ戻る</a>
 </form>
-{% if user.picture %}
-    <img src='{{ user.picture.url }}'>
-{% endif %}
 {% endblock %}
+</body>

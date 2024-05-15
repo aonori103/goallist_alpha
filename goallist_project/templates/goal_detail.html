@@ -1,7 +1,15 @@
 {% extends 'base.html' %}
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+
+<body>
 {% block content %}
+<div style="height: 300px; display: flex; justify-content: center; align-items: center;">
 <div class='col-10 offset-1'>
-<h4>夢</h4>
+<h4 style="font-size: 28px; font-weight: bold; border-bottom: double 4px; margin: 20px; text-align: left;">夢</h4>
+<div style='margin: 20px 0px 0px 60px;'>
 <table class='table table-striped table-bordered'>
     <thead>
         <tr>
@@ -15,6 +23,7 @@
     </tbody>
 </table>
 </div>
+{% comment %}
 {% if tasks %}
 <div class='col-10 offset-1'>
 <h4>タスクリスト</h4>
@@ -54,7 +63,16 @@
 {% endif %}
 <td><a href="{% url 'accounts:task_regist' pk=goal.id %}">タスクを登録する</a></td>
 <div>
-<td><a href="{% url 'accounts:pict_generate' pk=goal.id %}">この夢でプロフィール画像を作成する</a></td>
+{% endcomment %}
+<p style="font-size: 20px; font-weight: bold; border-bottom: double 4px; margin: 20px; text-align: left;">
+    画像生成
+</p>
+<p style="font-size: 18px; margin: 20px 0px 0px 60px;">
+    <a href="{% url 'accounts:pict_generate' pk=goal.id %}">この夢でプロフィール画像を作成する</a><br>
+</p>
+
+<p style="font-size: 18px; margin: 20px 0px 0px 60px;"><a href="{% url 'accounts:goal_list' %}">リストへ戻る</a></p>
+
 </div>
-<a href="{% url 'accounts:goal_list' %}">リストへ戻る</a>
+</div>
 {% endblock %}

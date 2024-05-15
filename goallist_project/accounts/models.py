@@ -47,8 +47,8 @@ class Users(AbstractBaseUser, PermissionsMixin):
     introduction = models.CharField(max_length=15, blank=True)
     birthday = models.DateField(default='1900-01-01')
     picture = models.FileField(upload_to='picture/%Y/%m/%d/', null=True)
-    created_at = models.DateTimeField()
-    upload_at = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    upload_at = models.DateTimeField(auto_now=True)
     is_active = models.BooleanField(default=True) #ログインしているか
     is_staff = models.BooleanField(default=False) #管理権限
     
@@ -57,6 +57,8 @@ class Users(AbstractBaseUser, PermissionsMixin):
     
     objects = UserManager()
     
+    def __str__(self):
+        return self.name
     
     # def get_absolute_url(self):
     #     return reverse_lazy('accounts:user_login')
@@ -64,8 +66,8 @@ class Users(AbstractBaseUser, PermissionsMixin):
 
 
 class BaseMeta(models.Model):
-    created_at = models.DateTimeField(default=datetime.now())
-    upload_at = models.DateTimeField(default=datetime.now())
+    created_at = models.DateTimeField(auto_now_add=True)
+    upload_at = models.DateTimeField(auto_now=True)
     
     class Meta:
         abstract = True
@@ -90,16 +92,24 @@ class Goals(BaseMeta):
         if self.pk is None and user_goals.count() >= max_goals:
             raise ValidationError("夢リストの上限に達しました。")
         super().save(*args, **kwargs)
+        
+    
+    def __str__(self):
+        return self.name
     
 
 
 class Tasks(BaseMeta):
     goals = models.ForeignKey(Goals, on_delete=models.CASCADE)
     
-    task_title = models.CharField(max_length=100)
+    task_title = models.CharField(max_length=50)
     task_condition = models.BooleanField(default='0', blank=False, null=False)
     task_priority = models.IntegerField(default='0', blank=False, null=False)
     task_due = models.DateField(default=timezone.now)
     
     class Meta:
         db_table = 'tasks'
+        
+    
+    def __str__(self):
+        return self.name

@@ -26,9 +26,9 @@ STATIC_DIR = os.path.join(BASE_DIR, 'static')
 SECRET_KEY = 'django-insecure-e2=a1r5)xs998xu4mn@03hs032%*f=vhf25vq1omchchgkor7e'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '.pythonanywhere.com', 'aonori103.pythonanywhere.com']
 
 
 # Application definition
@@ -149,3 +149,9 @@ SITE_ID = 1 # django_siteテーブル上のどのサイトを認証するか
 ACCOUNT_EMAIL_REQUIRED = True # 認証にメールアドレスが必要か
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USERNAME_REQUIRED = False # 認証にユーザ名が必要か
+
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+
+from django.core.management.utils import get_random_secret_key
+SECRET_KEY = get_random_secret_key()  

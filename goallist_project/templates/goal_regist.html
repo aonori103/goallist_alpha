@@ -1,8 +1,31 @@
 {% extends 'base.html' %}
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+
 {% block content %}
-<form method='POST'>
+<div style="height: 400px; display: flex; justify-content: center; align-items: center;">
+<form method='POST' style="max-width:300px;margin:auto">
     {% csrf_token %}
-    {{ form.as_p }}
+            <h1 style="font-size: 28px; font-weight: bold; border-bottom: double 4px; margin: 20px; text-align: center;">夢登録</h1>
+
+            <p style="font-size: 16px; font-weight: bold; border-left: solid 5px #7db4e6; padding: 0.25em 0.5em; margin: 10px 0px 5px -10px; background: #c2edff;">叶えたい夢</p>
+            <div class="form-group">
+                <input class="form-control" type="text" placeholder="叶えたい夢"
+                name="{{ form.goal_title.html_name }}"
+                autocomplete="{{ form.goal_title.html_name }}" maxlength="15"
+                id="{{ form.goal_title.id_for_label }}">
+            </div>
+
+            <p style="font-size: 16px; font-weight: bold; border-left: solid 5px #7db4e6; padding: 0.25em 0.5em; margin: 10px 0px 5px -10px; background: #c2edff;">夢の詳細</p>
+            <div class="form-group">
+                <input class="form-control" type="text" placeholder="夢の詳細"
+                name="{{ form.goal_detail.html_name }}"
+                autocomplete="{{ form.goal_detail.html_name }}" maxlength="30"
+                id="{{ form.goal_detail.id_for_label }}">
+            </div>
+
     <input type='submit' value="夢登録">
 </form>
 {% endblock %}

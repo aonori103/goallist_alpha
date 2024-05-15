@@ -1,5 +1,20 @@
 {% extends 'base.html' %}
+<head></head>
+
+<body>
 {% block content %}
-<h1>ホーム画面</h1>
-<p>現在時刻は{{ time }}です</p>
+<h1 style="font-size: 28px; font-weight: bold; border-bottom: double 4px; margin: 20px; padding: 20px;">夢100リストへようこそ</h1>
+            {% if user.is_authenticated %}  {#ログインしている場合#}
+            <p style="font-size: 18px; margin: 20px 0px 0px 60px;">
+            ようこそ {{ user.username }} さん。<br>
+            現在時刻は{{ time }}です。
+            </p>
+
+            {% else %}  {#ログインしていない場合#}
+            <p style="font-size: 18px; margin: 20px 0px 0px 60px;">現在時刻は{{ time }}です。<br>
+            登録済みの方はログインしてください。
+            </p>
+            {% endif %}
+</p>
 {% endblock %}
+</body>

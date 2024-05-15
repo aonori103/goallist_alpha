@@ -1,10 +1,39 @@
 {% extends 'base.html' %}
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+
+<body>
 {% block content %}
-<form method='POST'>
-<h3>{{ object.goal_title }}</h3>
-<div>この夢を削除しますか？</div>
-{% csrf_token %}
-<input type='submit' value="削除">
-</form>
-<a href="{% url 'accounts:goal_list' %}">リストへ戻る</a>
+<div style="height: 300px; display: flex; justify-content: center; align-items: center;">
+<div class='col-10 offset-1'>
+<h4 style="font-size: 28px; font-weight: bold; border-bottom: double 4px; margin: 20px; text-align: left;">夢の削除</h4>
+    <div style='margin: 20px 0px 0px 60px;'>
+        <table class='table table-striped table-bordered'>
+            <thead>
+                <tr>
+                    <th>{{ object.goal_title }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ object.goal_detail }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+<div class='col-10 offset-1'>
+    <p style="font-size: 18px; margin: 20px 0px 0px 0px;">この夢を削除しますか？</p>
+    <form method='POST'>
+        {% csrf_token %}
+        <input type='submit' value="削除する">
+    </form>
+    <p style="font-size: 18px; margin: 20px 0px 0px 0px;"><a href="{% url 'accounts:goal_list' %}">リストへ戻る</a></p>
+</div>
+
+</div>
+</div>
 {% endblock %}
+</body>
