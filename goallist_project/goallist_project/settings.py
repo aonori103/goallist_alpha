@@ -133,7 +133,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (STATIC_DIR,)
+# STATICFILES_DIRS = (STATIC_DIR,)
+STATIC_ROOT =  os.path.join(BASE_DIR, "static")
 
 LOGIN_URL = '/accounts/user_login' #ログインしてないときにlogin_requiredのViewを開いたときのリダイレクト先View
 LOGIN_REDIRECT_URL = '/accounts/home' #LoginViewで遷移先が指定されていないときに遷移するURL
