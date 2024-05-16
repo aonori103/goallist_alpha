@@ -1,6 +1,5 @@
 from django.contrib import admin
-from .models import Users, Goals, Tasks
+from .models import Users, Goals
 
 admin.site.register(Users)
 admin.site.register(Goals)
-admin.site.register(Tasks)

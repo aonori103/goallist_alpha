@@ -1,6 +1,6 @@
 from django import forms
 from datetime import datetime
-from .models import Users, Goals, Tasks
+from .models import Users, Goals
 from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth.forms import AuthenticationForm
 
@@ -42,9 +42,6 @@ class UserEditForm(forms.ModelForm):
     job = forms.CharField(label='職業', initial=Users.job, max_length=100, required=False)
     introduction = forms.CharField(label='自己紹介', initial=Users.introduction, max_length=500, required=False)
     birthday = forms.DateField(label='誕生日', initial=Users.birthday)
-    # picture = forms.FileField(upload_to='picture/', required=False)
-    # password = forms.CharField(label='パスワード', help_text='30字以内で入力してください', max_length=30, widget=forms.PasswordInput(), required=False)
-    # confirm_password = forms.CharField(label='パスワード', help_text='30字以内で入力してください', max_length=30, widget=forms.PasswordInput(), required=False)
     
     class Meta:
         model = Users
@@ -93,40 +90,3 @@ class GoalEditForm(forms.ModelForm):
         return obj
 
 
-# タスク編集用画面とフォーム作る。
-class TaskRegistForm(forms.ModelForm):
-    task_title = forms.CharField(label='タスク', max_length=50)
-    task_priority = forms.IntegerField(label='優先順位', initial=False)
-    task_due = forms.DateField(label='期限', initial='2000-01-01',required=False)
-    goals = forms.IntegerField(widget=forms.HiddenInput)
-    
-    class Meta:
-        model = Tasks
-        fields = ['task_title', 'task_priority', 'task_due','goals']
-        success_message = 'タスクを登録しました'
-    
-    def save(self, *args, **kwargs):
-        obj = super(TaskRegistForm, self).save(commit=False)
-        obj.created_at = datetime.now()
-        obj.upload_at = datetime.now()
-        obj.save()
-        return obj
-
-
-class TaskUpdateForm(forms.ModelForm):
-    task_title = forms.CharField(label='タスク', initial=Tasks.task_title, max_length=50)
-    task_condition = forms.BooleanField(label='進捗', initial=False, required=False)
-    task_priority = forms.IntegerField(label='優先順位', initial=Tasks.task_priority)
-    task_due = forms.DateField(label='期限', initial=Tasks.task_due, required=False)
-    
-    class Meta:
-        model = Tasks
-        fields = ['task_title', 'task_condition', 'task_priority', 'task_due']
-        success_message = 'タスクを更新しました'
-    
-    
-    def save(self, *args, **kwargs):
-        obj = super(TaskUpdateForm, self).save(commit=False)
-        obj.upload_at = datetime.now()
-        obj.save()
-        return obj

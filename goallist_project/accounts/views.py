@@ -7,7 +7,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.views.generic.base import TemplateView, View
-from .forms import RegistForm, UserLoginForm, UserEditForm, GoalRegistForm, GoalEditForm, TaskRegistForm, TaskUpdateForm
+from .forms import RegistForm, UserLoginForm, UserEditForm, GoalRegistForm, GoalEditForm
 from django.contrib.auth import authenticate, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView
@@ -72,21 +72,6 @@ class UserEditView(UpdateView, SuccessMessageMixin, LoginRequiredMixin): #ログ
     def get_success_message(self, cleaned_data):
         return cleaned_data.get('username') + 'を更新しました'
         
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     picture_form = forms.PictureUploadForm()
-    #     pictures = Pictures.objects.filter_by_book(book=self.object)
-    #     context['pictures'] = pictures
-    #     context['picture_form'] = picture_form
-    #     return context
-    
-    # def post(self, request, *args, **kwargs):
-    #     # 画像をアップロードする処理を描く
-    #     picture_form = forms.PictureUploadForm(request.POST or None, request.FILES or None)
-    #     if picture_form.is_valid() and request.FILES:
-    #         book = self.get_object() # 今更新しているbookがどのbookなのかわかる
-    #         picture_form.save(book=book)
-    #     return super(BookUpdateView, self).post(request, *args, **kwargs)
         
     
     def model_form_upload(request):
@@ -149,62 +134,11 @@ class GoalDetailView(View, LoginRequiredMixin):
     def get(self, request, pk, **kwargs):
         context = {}
         context["goal"] = Goals.objects.filter(id=pk).first()
-        # context["tasks"] = Tasks.objects.filter(goals_id=pk)
-        
-        # count_task = Tasks.objects.filter(goals_id=pk).count()
-        # count_clear = Tasks.objects.filter(task_condition=True).count()
         obj = Goals.objects.filter(id=pk).first()
-        # obj.goal_condition = int(count_clear / count_task *100)
         obj.save()
         return render(request, "goal_detail.html", context)
     
 
-
-class TaskRegistView(CreateView, LoginRequiredMixin):
-
-    def get(self, request, pk, *args, **kwargs):
-        
-        context = {}
-        
-        goal = Goals.objects.filter(id=pk).first()
-        # context["taskregistform"] = TaskRegistForm(request.POST or None, request.FILES or None, initial={"goal", goal})
-        context["taskregistform"] = TaskRegistForm(initial={"goal", goal})
-        context["goal"] = goal
-        context["tasks"] = Tasks.objects.filter(goals_id=pk)
-            
-        form = TaskRegistForm()
-        context["taskregistform"] = form
-
-        return render(request,"task_regist.html",context)
-
-    def post(self, request, pk, *args, **kwargs):
-
-        if request.method =='POST':
-            form = TaskRegistForm(request.POST or None)
-            if form.is_valid():
-                f_instance = form.save(commit=False)  # データベースに保存せずにオブジェクトを取得
-                t_instance = Tasks.objects.get(goals_id=pk)
-                f_instance.goals = self.get_object()
-                f_instance.save()  # データベースに保存
-                return redirect("accounts:task_regist", pk=self.kwargs['pk'])
-            else:
-                print("バリデーションNG")
-
-        return render(request, "task_regist.html", {"taskregistform": form, "pk": pk})
-
-
-# タスク編集画面
-class TaskEditView(UpdateView, SuccessMessageMixin, LoginRequiredMixin):
-    template_name = 'task_edit.html'
-    model = Tasks
-    form_class = TaskUpdateForm
-    success_url = reverse_lazy('accounts:goal_list')
-
-
-class TaskDeleteView(LoginRequiredMixin, DeleteView):
-    template_name = 'task_delete.html'
-    model = Tasks
-    success_url = reverse_lazy('accounts:goal_list')
 
 
 # 画像生成画面つくる

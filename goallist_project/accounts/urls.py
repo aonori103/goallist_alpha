@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import (HomeView, RegisterUserView, UserLoginView, UserLogoutView, UserEditView, GoalListView, GoalDetailView, GoalRegistView, GoalEditView, GoalDeleteView, TaskRegistView, TaskEditView, PictGenerate, TaskDeleteView)
+from .views import (HomeView, RegisterUserView, UserLoginView, UserLogoutView, UserEditView, GoalListView, GoalDetailView, GoalRegistView, GoalEditView, GoalDeleteView, PictGenerate)
 
 
 app_name = 'accounts'
@@ -14,9 +14,6 @@ urlpatterns=[
     path('goal_delete/<int:pk>', GoalDeleteView.as_view(), name='goal_delete'),
     path('goal_regist/', GoalRegistView.as_view(), name='goal_regist'),
     path('goal_edit/<int:pk>', GoalEditView.as_view(), name='goal_edit'),
-    path('task_regist/<int:pk>', TaskRegistView.as_view(), name='task_regist'),
-    path('task_edit/<int:pk>', TaskEditView.as_view(), name='task_edit'),
-    path('task_delete/<int:pk>', TaskDeleteView.as_view(), name='task_delete'),
     path('pict_generate/<int:pk>', PictGenerate.as_view(), name='pict_generate'),
     
 ]

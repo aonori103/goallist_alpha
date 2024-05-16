@@ -60,8 +60,6 @@ class Users(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.name
     
-    # def get_absolute_url(self):
-    #     return reverse_lazy('accounts:user_login')
 
 
 
