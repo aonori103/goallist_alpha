@@ -71,7 +71,7 @@
     <a href="{% url 'accounts:pict_generate' pk=goal.id %}">この夢でプロフィール画像を作成する</a><br>
 </p>
 
-<p style="font-size: 18px; margin: 20px 0px 0px 60px;"><a href="{% url 'accounts:goal_list' %}">リストへ戻る</a></p>
+<p style="font-size: 18px; margin: 20px 0px 0px 60px;"><a href="{% url 'accounts:goal_list' pk=user.id %}">リストへ戻る</a></p>
 
 </div>
 </div>

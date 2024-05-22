@@ -9,7 +9,7 @@
             <a class='navbar-brand' href="{% url 'accounts:home' %}">ホーム</a>
 
             {% if user.is_authenticated %}  {#ログインしている場合#}
-            <a class='navbar-brand' href="{% url 'accounts:goal_list' %}">夢一覧</a>
+            <a class='navbar-brand' href="{% url 'accounts:goal_list' pk=user.id %}">夢一覧</a>
             <a class='navbar-brand' href="{% url 'accounts:goal_regist' %}">夢登録</a>
             <a class='navbar-brand' href="{% url 'accounts:user_edit' pk=user.id %}">ユーザー情報編集</a>
             <a class='navbar-brand' href="{% url 'accounts:user_logout' %}">ログアウト</a>

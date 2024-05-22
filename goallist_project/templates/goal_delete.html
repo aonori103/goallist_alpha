@@ -30,7 +30,7 @@
         {% csrf_token %}
         <input type='submit' value="削除する">
     </form>
-    <p style="font-size: 18px; margin: 20px 0px 0px 0px;"><a href="{% url 'accounts:goal_list' %}">リストへ戻る</a></p>
+    <p style="font-size: 18px; margin: 20px 0px 0px 0px;"><a class='navbar-brand' href="{% url 'accounts:goal_list' pk=user.id %}">リストへ戻る</a></p>
 </div>
 
 </div>

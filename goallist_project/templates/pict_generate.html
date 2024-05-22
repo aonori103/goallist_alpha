@@ -1,9 +1,26 @@
 <!DOCTYPE html>
 {% extends 'base.html' %}
+
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+
+<body>
 {% block content %}
 
+<div style="height: 100px; display: flex; justify-content: center; align-items: center;">
+<div class='col-10 offset-1'>
+<h1 style="font-size: 28px; font-weight: bold; border-bottom: double 4px; margin: 20px; text-align: left;">プロフィール</h1>
+</div>
+</div>
+
+<div style="margin: 20px; display: flex; justify-content: center; align-items: center;">
 {% load static %}
-    <h1>User Profile</h1>
-    <img src="{% static 'cat.png' %}">
-<a href="{% url 'accounts:goal_list' %}">リストへ戻る</a>
+    <img src="{% static 'kakouzumi.png' %}">
+<p style="font-size: 18px; margin: 20px 0px 0px 60px;"><a href="{% url 'accounts:goal_list' pk=user.id %}">リストへ戻る</a></p>
+</div>
+
+
 {% endblock %}
+</body>
