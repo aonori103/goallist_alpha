@@ -6,32 +6,32 @@
 
 <body>
 {% block content %}
-<div style="height: 400px; display: flex; justify-content: center; align-items: center;">
-<form method='POST' enctype='multipart/form-data' style="max-width:300px;margin:auto">
+<div style="margin: 0 auto; max-width: 800px;">
+
+    <h1 style="font-size: 28px; font-weight: bold; border-bottom: double 4px; margin: 20px; padding: 20px; display: flex; justify-content: center; align-items: center;">夢を編集する</h1>
+
+    <form method='POST' enctype='multipart/form-data' style="max-width:300px;margin:auto">
     {% csrf_token %}
-    <h1 style="font-size: 28px; font-weight: bold; border-bottom: double 4px; margin: 20px; text-align: center;">夢を編集する</h1>
 
-        <div class="form-group">
-            <p style="font-size: 16px; font-weight: bold; border-left: solid 5px #7db4e6; padding: 0.25em 0.5em; margin: 10px 0px 5px -10px; background: #c2edff;">叶えたい夢</p>
-                <input class="form-control" type="text"
-                name="{{ form.goal_title.html_name }}" value="{{ goals.goal_title }}"
-                autocomplete="{{ form.goal_title.html_name }}" maxlength="10"
-                id="{{ form.goal_title.id_for_label }}">
-        </div>
+            <div class="form-group">
+                <p style="font-size: 16px; font-weight: bold; border-left: solid 5px #7db4e6; padding: 0.25em 0.5em; margin: 20px 0px 5px -10px; background: #c2edff;">
+                    <label for="id_goal_title" class="form-label">叶えたい夢</label>
+                </p>
+                {{ form.goal_title }}
+            </div>
 
-        <div class="form-group">
-            <p style="font-size: 16px; font-weight: bold; border-left: solid 5px #7db4e6; padding: 0.25em 0.5em; margin: 10px 0px 5px -10px; background: #c2edff;">夢の詳細</p>
-                <input class="form-control" type="text"
-                name="{{ form.goal_detail.html_name }}" value="{{ goals.goal_detail }}"
-                autocomplete="{{ form.goal_detail.html_name }}"
-                id="{{ form.goal_detail.id_for_label }}">
-        </div>
+            <div class="form-group">
+                <p style="font-size: 16px; font-weight: bold; border-left: solid 5px #7db4e6; padding: 0.25em 0.5em; margin: 20px 0px 5px -10px; background: #c2edff;">
+                    <label for="id_goal_detail" class="form-label">夢の詳細</label>
+                </p>
+                {{ form.goal_detail }}
+            </div>
 
-    <input type='submit' value="変更">
-</form>
+        <input type='submit' value="変更">
+    </form>
 </div>
-<div class='col-10 offset-1' style='text-align: center;'>
-<a href="{% url 'accounts:goal_list' pk=user.id %}">リストへ戻る</a>
+<div style="display: flex; justify-content: center; align-items: center; margin: 40px 0px 0px 0px;">
+    <a style="border-radius: 10px; background-color: #c2edff; padding: 5px;" href="{% url 'accounts:goal_list' pk=user.id %}">リストへ戻る</a>
 </div>
 {% endblock %}
 </body>

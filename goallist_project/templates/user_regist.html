@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
 
@@ -9,32 +10,53 @@
 <div style="height: 400px; display: flex; justify-content: center; align-items: center;">
 <form method='POST' style="max-width:300px;margin:auto">
     {% csrf_token %}
+    
             <h1 class="h3 mb-3 fw-normal">ユーザー登録</h1>
 
+            {% if form.non_field_errors %}
+                <div class="alert alert-danger">
+                    {{ form.non_field_errors.as_text }}
+                </div>
+            {% endif %}
+
             <div class="form-group">
-                <input class="form-control" type="text" placeholder="Username"
-                name="{{ form.username.html_name }}"
-                autocomplete="{{ form.username.html_name }}" maxlength="10"
-                id="{{ form.username.id_for_label }}">
+                <p style="font-size: 16px; font-weight: bold; border-left: solid 5px #7db4e6; padding: 0.25em 0.5em; margin: 20px 0px 5px -10px; background: #c2edff;">
+                    <label for="id_username" class="form-label">ユーザーネーム</label>
+                </p>
+                {{ form.username }}
+                {% if form.username.errors %}
+                    <div style="color:red;">{{ form.username.errors.as_text }}</div>
+                {% endif %}
             </div>
 
             <div class="form-group">
-                <input class="form-control" type="text" placeholder="Email"
-                name="{{ form.address.html_name }}"
-                autocomplete="{{ form.address.html_name }}"
-                id="{{ form.address.id_for_label }}">
+                <p style="font-size: 16px; font-weight: bold; border-left: solid 5px #7db4e6; padding: 0.25em 0.5em; margin: 20px 0px 5px -10px; background: #c2edff;">
+                    <label for="id_address" class="form-label">メールアドレス</label>
+                </p>
+                {{ form.address }}
+                {% if form.address.errors %}
+                    <div style="color:red;">{{ form.address.errors.as_text }}</div>
+                {% endif %}
             </div>
 
             <div class="form-group">
-                <input class="form-control" type="password" placeholder="Password"
-                name="{{ form.password.html_name }}" maxlength="30"
-                id="{{ form.password.id_for_label }}">
+                <p style="font-size: 16px; font-weight: bold; border-left: solid 5px #7db4e6; padding: 0.25em 0.5em; margin: 20px 0px 5px -10px; background: #c2edff;">
+                    <label for="id_password" class="form-label">パスワード</label>
+                </p>
+                {{ form.password }}
+                {% if form.password.errors %}
+                    <div style="color:red;">{{ form.password.errors.as_text }}</div>
+                {% endif %}
             </div>
 
             <div class="form-group">
-                <input class="form-control" type="password" placeholder="再入力"
-                name="{{ form.confirm_password.html_name }}" maxlength="30"
-                id="{{ form.confirm_password.id_for_label }}">
+                <p style="font-size: 16px; font-weight: bold; border-left: solid 5px #7db4e6; padding: 0.25em 0.5em; margin: 20px 0px 5px -10px; background: #c2edff;">
+                    <label for="id_confirm_password" class="form-label">パスワード再入力</label>
+                </p>
+                {{ form.confirm_password }}
+                {% if form.confirm_password.errors %}
+                    <div style="color:red;">{{ form.confirm_password.errors.as_text }}</div>
+                {% endif %}
             </div>
 
     <input type='submit' value="ユーザー登録">

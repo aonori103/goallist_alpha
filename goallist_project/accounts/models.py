@@ -36,6 +36,7 @@ class UserManager(BaseUserManager):
         user.set_password(password) #パスワードをハッシュ化
         user.is_active = True
         user.is_staff = True
+        user.is_superuser = True
         user.save(using=self._db) #ユーザーを保存
         return user
 
@@ -58,9 +59,7 @@ class Users(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
     
     def __str__(self):
-        return self.name
-    
-
+        return self.username
 
 
 class BaseMeta(models.Model):
@@ -93,7 +92,7 @@ class Goals(BaseMeta):
         
     
     def __str__(self):
-        return self.name
+        return self.goal_title
     
 
 
@@ -110,4 +109,4 @@ class Tasks(BaseMeta):
         
     
     def __str__(self):
-        return self.name
+        return self.task_title
