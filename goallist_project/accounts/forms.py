@@ -41,11 +41,11 @@ class UserLoginForm(AuthenticationForm):
 
 # ユーザー編集用画面とフォーム作る。jobとかintroductionとかを追加する
 class UserEditForm(forms.ModelForm):
-    username = forms.CharField(label='名前', help_text="10字以内 / 必須", max_length=10, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '10字以内', 'value': Users.username}))
+    username = forms.CharField(label='名前', help_text="10字以内 / 必須", max_length=10, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '10字以内'}))
     address = forms.EmailField(label='メールアドレス', help_text="必須", widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'xxx@mail.com'}))
     job = forms.CharField(label='職業', help_text="10字以内", max_length=10, required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '10字以内'}))
     introduction = forms.CharField(label='自己紹介', help_text="15字以内", max_length=15, required=False,  widget=forms.Textarea(attrs={'class': 'form-control', 'style': 'line-height: 1.5; height: 6em;', 'placeholder': '簡潔に'}))
-    birthday = forms.DateField(label='誕生日', widget=forms.DateInput(attrs={'type': 'date'}))
+    birthday = forms.DateField(label='誕生日', widget=forms.DateInput(attrs={'type': 'date'}), required=True)
 
     class Meta:
         model = Users
@@ -53,6 +53,7 @@ class UserEditForm(forms.ModelForm):
         error_messages = {
             "username": {"required": "ユーザー名が入力されていません",},
             "address": {"required": "メールアドレスが入力されていません",},
+            "birthday": {"required": "誕生日を入力してください",},
         }
     
     def save(self, *args, **kwargs):
@@ -65,8 +66,8 @@ class UserEditForm(forms.ModelForm):
     
     # 夢編集用画面とフォーム作る。
 class GoalRegistForm(forms.ModelForm):
-    goal_title = forms.CharField(label='叶えたい夢', max_length=15, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '15字以内。簡潔に'}))
-    goal_detail = forms.CharField(label='夢の詳細', max_length=30, widget=forms.Textarea(attrs={'class': 'form-control', 'style': 'line-height: 1.5; height: 6em;', 'placeholder': '改行も反映されます'}), required=False)
+    goal_title = forms.CharField(label='叶えたい夢', max_length=15, help_text="15字以内 / 必須", widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '簡潔に'}), required=True)
+    goal_detail = forms.CharField(label='夢の詳細', max_length=30, help_text="30字以内", widget=forms.Textarea(attrs={'class': 'form-control', 'style': 'line-height: 1.5; height: 6em;', 'placeholder': '改行も反映されます'}), required=False)
     
     class Meta:
         model = Goals
@@ -81,8 +82,8 @@ class GoalRegistForm(forms.ModelForm):
 
 
 class GoalEditForm(forms.ModelForm):
-    goal_title = forms.CharField(label='叶えたい夢', initial=Goals.goal_title, max_length=15, widget=forms.TextInput(attrs={'class': 'form-control'}))
-    goal_detail = forms.CharField(label='夢の詳細', initial=Goals.goal_detail, max_length=30, required=False, widget=forms.Textarea(attrs={'class': 'form-control', 'style': 'line-height: 1.5; height: 6em;'}))
+    goal_title = forms.CharField(label='叶えたい夢', initial=Goals.goal_title, max_length=15, help_text="15字以内 / 必須", widget=forms.TextInput(attrs={'class': 'form-control'}), required=True)
+    goal_detail = forms.CharField(label='夢の詳細', initial=Goals.goal_detail, max_length=30, help_text="30字以内", widget=forms.Textarea(attrs={'class': 'form-control', 'style': 'line-height: 1.5; height: 6em;'}), required=False)
     
     class Meta:
         model = Goals

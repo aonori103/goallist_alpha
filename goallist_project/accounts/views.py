@@ -22,6 +22,9 @@ from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 from django.urls import reverse
 from django.contrib import messages
+from django.core.files.base import ContentFile
+from django.core.files.storage import default_storage
+import mimetypes
 
 
 class HomeView(TemplateView):
@@ -95,6 +98,19 @@ class UserEditView(UpdateView, SuccessMessageMixin, LoginRequiredMixin): #ログ
         form.instance.upload_at = datetime.now()
         messages.success(self.request, 'ユーザー情報を変更しました')
         return super().form_valid(form)
+
+
+def download_profile_picture(request, pk):
+    user = Users.objects.get(pk=pk)
+    # プロフィール画像のパスを取得
+    profile_picture_path = user.picture.path
+    # ファイルのMIMEタイプを取得
+    content_type = mimetypes.guess_type(profile_picture_path)[0]
+    # ダウンロード用のレスポンスを作成
+    response = HttpResponse(default_storage.open(profile_picture_path), content_type=content_type)
+    # ダウンロード用のヘッダを設定
+    response['Content-Disposition'] = f'attachment; filename="{user.username}_profile_picture.{content_type.split("/")[1]}"'
+    return response
     
     
     
@@ -103,6 +119,10 @@ class GoalListView(ListView, LoginRequiredMixin):
     template_name = 'goal_list.html'
     model = Goals
     context_object_name = 'goals'
+    
+    def get_queryset(self):
+        # 現在のユーザーが登録したゴールのみを取得するクエリを実行
+        return Goals.objects.filter(user=self.request.user)
 
 
 # 夢作成用画面作る（フォームあり）
@@ -197,6 +217,9 @@ class PictGenerate(View, LoginRequiredMixin):
     # 画像を保存するパスを指定
         save_path = '/home/aonori103/goallist_alpha/goallist_project/static/kakouzumi.png'
         cv2.imwrite(save_path, img)
+
+        # Usersモデルのインスタンスに画像を割り当てる
+        user_profile.picture.save('generated_image.png', ContentFile(open(save_path, 'rb').read()), save=True)
 
     # テンプレートに渡すコンテキストを作成
         context = {

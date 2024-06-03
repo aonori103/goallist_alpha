@@ -57,10 +57,26 @@
                 {{ form.birthday }}
             </div>
             <p id="passwordHelpBlock" class="form-text">デフォルト設定 : 1900/01/01</p>
+            {% if form.birthday.errors %}
+                <div style="color:red;">{{ form.birthday.errors.as_text }}</div>
+            {% endif %}
 
-            <input type='submit' value="設定変更"><br>
-        <div style="display: flex; justify-content: center; align-items: center; margin: 40px 0px 0px 0px;">
-            <a style="border-radius: 10px; background-color: #c2edff; padding: 5px;" href="{% url 'accounts:home' %}">ホームへ戻る</a>
+            <div style="display: flex; justify-content: center; margin: 20px 0px 80px 0px; align-items: center;">
+                <input type='submit' class="btn btn-success" value="設定変更"><br>
+            </div>
+
+            {% if user.picture %}
+                <p style="font-size: 16px; font-weight: bold; border-left: solid 5px #7db4e6; padding: 0.25em 0.5em; margin: 20px 0px 5px -10px; background: #c2edff;">
+                    <label for="id_username" class="form-label">プロフィール画像のダウンロード</label>
+                </p>
+                <div style="display: flex; justify-content: center; align-items: center; margin: 20px 0px 20px 0px;">
+                    <a href="{% url 'accounts:download_profile_picture' pk=user.id %}" class="btn btn-warning">ダウンロードする</a>
+                </div>
+                <p style="display: flex; justify-content: center; align-items: center; margin: 0px 0px 40px 0px;">※ダウンロード後はブラウザバックしてください</p>
+            {% endif %}
+
+        <div style="display: flex; justify-content: center; align-items: center; margin: 40px 0px 40px 0px;">
+            <a class="btn btn-light" href="{% url 'accounts:home' %}">ホームへ戻る</a>
         </div>
     </form>
 </div>

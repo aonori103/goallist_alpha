@@ -29,11 +29,13 @@
     <div style="display: flex; justify-content: center; align-items: center; margin: 20px 0px 0px 0px;">
         <form method='POST'>
             {% csrf_token %}
-            <button type="submit" class="btn btn-danger">削除する</button>
+            <div style="display: flex; justify-content: center; align-items: center;">
+                <button type="submit" class="btn btn-danger">削除する</button>
+            </div>
         </form>
     </div>
-    <div style="display: flex; justify-content: center; align-items: center; margin: 80px 0px 0px 0px;">
-        <a style="border-radius: 10px; background-color: #c2edff; padding: 5px;" href="{% url 'accounts:goal_list' pk=user.id %}">リストへ戻る</a>
+        <div style="display: flex; justify-content: center; align-items: center; margin: 40px 0px 40px 0px;">
+            <a class="btn btn-light" href="{% url 'accounts:goal_list' pk=user.id %}">リストへ戻る</a>
     </div>
 
 </div>

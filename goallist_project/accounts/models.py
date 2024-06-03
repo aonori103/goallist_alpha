@@ -42,11 +42,11 @@ class UserManager(BaseUserManager):
 
 
 class Users(AbstractBaseUser, PermissionsMixin):
-    username = models.CharField(max_length=10)
+    username = models.CharField(max_length=10, blank=False)
     address = models.EmailField(unique=True, blank=False)
     job = models.CharField(max_length=10, blank=True)
     introduction = models.CharField(max_length=15, blank=True)
-    birthday = models.DateField(default='1900-01-01')
+    birthday = models.DateField(default='1900-01-01', blank=False)
     picture = models.FileField(upload_to='picture/%Y/%m/%d/', null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     upload_at = models.DateTimeField(auto_now=True)

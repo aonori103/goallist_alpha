@@ -10,7 +10,7 @@
 
     <h1 style="font-size: 28px; font-weight: bold; border-bottom: double 4px; margin: 20px; padding: 20px; display: flex; justify-content: center; align-items: center;">夢を編集する</h1>
 
-    <form method='POST' enctype='multipart/form-data' style="max-width:300px;margin:auto">
+    <form method='POST' enctype='multipart/form-data' style="max-width:300px; margin:auto" class="needs-validation" novalidate>
     {% csrf_token %}
 
             <div class="form-group">
@@ -18,7 +18,11 @@
                     <label for="id_goal_title" class="form-label">叶えたい夢</label>
                 </p>
                 {{ form.goal_title }}
+                {% if form.goal_title.errors %}
+                    <div style="color:red;">{{ form.goal_title.errors.as_text }}</div>
+                {% endif %}
             </div>
+            <p id="passwordHelpBlock" class="form-text">{{ form.goal_title.help_text }}</p>
 
             <div class="form-group">
                 <p style="font-size: 16px; font-weight: bold; border-left: solid 5px #7db4e6; padding: 0.25em 0.5em; margin: 20px 0px 5px -10px; background: #c2edff;">
@@ -26,12 +30,15 @@
                 </p>
                 {{ form.goal_detail }}
             </div>
+            <p id="passwordHelpBlock" class="form-text">{{ form.goal_detail.help_text }}</p>
 
-        <input type='submit' value="変更">
+        <div style="display: flex; justify-content: center; margin: 20px 0px 0px 0px; align-items: center;">
+            <input type='submit' class="btn btn-success" value="変更">
+        </div>
     </form>
 </div>
-<div style="display: flex; justify-content: center; align-items: center; margin: 40px 0px 0px 0px;">
-    <a style="border-radius: 10px; background-color: #c2edff; padding: 5px;" href="{% url 'accounts:goal_list' pk=user.id %}">リストへ戻る</a>
+        <div style="display: flex; justify-content: center; align-items: center; margin: 40px 0px 40px 0px;">
+            <a class="btn btn-light" href="{% url 'accounts:goal_list' pk=user.id %}">リストへ戻る</a>
 </div>
 {% endblock %}
 </body>

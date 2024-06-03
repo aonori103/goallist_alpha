@@ -44,7 +44,7 @@
     {% else %}
         <h1 style="font-size: 28px; font-weight: bold; border-bottom: double 4px; margin: 20px; padding: 20px; display: flex; justify-content: center; align-items: center;">リストは真っ白です。叶えたい夢を登録しましょう。</h1>
         <div style="display: flex; justify-content: center; margin: 40px 0px;">
-            <a style="font-size: 20px; border-radius: 10px; background-color: #c2edff; padding: 10px;" href="{% url 'accounts:goal_regist' %}">夢を登録する</a>
+            <a class="btn btn-primary" href="{% url 'accounts:goal_regist' %}">夢を登録する</a>
         </div>
     {% endif %}
 
