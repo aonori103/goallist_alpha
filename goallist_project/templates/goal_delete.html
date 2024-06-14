@@ -1,14 +1,16 @@
 {% extends 'base.html' %}
+{% load static %}
 <head>
 <meta charset="UTF-8">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
 
-<body>
 {% block content %}
+<body class="background-detail">
 <div style="margin: 0 auto; max-width: 800px;">
     
-    <h1 style="font-size: 28px; font-weight: bold; border-bottom: double 4px; margin: 20px; padding: 20px; display: flex; justify-content: center; align-items: center;">夢の削除</h1>
+    <h1 class="page-title">夢の削除</h1>
     
         <div style="max-height: 400px; overflow-y: auto; padding: 10px;">
             <table class='table table-striped table-bordered' style="text-align :center;">
@@ -29,15 +31,15 @@
     <div style="display: flex; justify-content: center; align-items: center; margin: 20px 0px 0px 0px;">
         <form method='POST'>
             {% csrf_token %}
-            <div style="display: flex; justify-content: center; align-items: center;">
+            <div class="button">
                 <button type="submit" class="btn btn-danger">削除する</button>
             </div>
         </form>
     </div>
-        <div style="display: flex; justify-content: center; align-items: center; margin: 40px 0px 40px 0px;">
+        <div class="button-home">
             <a class="btn btn-light" href="{% url 'accounts:goal_list' pk=user.id %}">リストへ戻る</a>
-    </div>
+        </div>
 
 </div>
-{% endblock %}
 </body>
+{% endblock %}

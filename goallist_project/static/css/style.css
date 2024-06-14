@@ -1,0 +1,83 @@
+.title-label {
+    font-size: 16px;
+    font-weight: bold;
+    border-left: solid 5px #7db4e6;
+    padding: 0.25em 0.5em;
+    margin: 20px 0px 5px -10px;
+    background: #c2edff;
+}
+.error-message{
+    color: red;
+}
+.page-title{
+    font-size: 28px;
+    font-weight: bold;
+    border-bottom: double 4px;
+    margin: 20px;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.form-style{
+    max-width:300px;
+    margin:auto;
+}
+.button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0px 80px 0px;
+}
+.button-home{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 40px 0px 40px 0px;
+}
+.button-pict{
+    font-size: 20px;
+    color :orange;
+    border-radius: 10px;
+    background-color: #ffedc2;
+    padding: 10px;
+}
+.home {
+    font-size: 18px;
+    margin: 20px 0px 0px 0px;
+    display: flex;
+    justify-content: center;
+    text-align:center;
+}
+.message-top{
+    margin-top: 20px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+.background-home{
+    background-color: white;
+    background-image : url("/static/sakura_right.png");
+    background-repeat: no-repeat;
+    background-position: right top;
+    background-attachment: fixed;
+}
+.background-list{
+    background-color: white;
+    background-image : url("/static/sakura_no_ki.png");
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    background-attachment: fixed;
+}
+.background-detail{
+    background-color: white;
+    background-image : url("/static/cosmos_left.png");
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    background-attachment: fixed;
+}
+.background-pict{
+    background-color: white;
+    background-image : url("/static/sakura_pattern.png");
+    background-attachment: fixed;
+
+}

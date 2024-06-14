@@ -1,18 +1,19 @@
 {% extends 'base.html' %}
+{% load static %}
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
 
-<body>
 {% block content %}
-<div style="height: 400px; display: flex; justify-content: center; align-items: center;">
+<body class="background-home">
+<div style="margin: 0 auto; max-width: 800px;">
+    
+    <h1 class="page-title">ユーザー登録</h1>
+
 <form method='POST' style="max-width:300px;margin:auto">
     {% csrf_token %}
-    
-            <h1 class="h3 mb-3 fw-normal">ユーザー登録</h1>
-
             {% if form.non_field_errors %}
                 <div class="alert alert-danger">
                     {{ form.non_field_errors.as_text }}
@@ -20,49 +21,49 @@
             {% endif %}
 
             <div class="form-group">
-                <p style="font-size: 16px; font-weight: bold; border-left: solid 5px #7db4e6; padding: 0.25em 0.5em; margin: 20px 0px 5px -10px; background: #c2edff;">
+                <p class="title-label">
                     <label for="id_username" class="form-label">ユーザーネーム</label>
                 </p>
                 {{ form.username }}
                 {% if form.username.errors %}
-                    <div style="color:red;">{{ form.username.errors.as_text }}</div>
+                    <div class="error-message">{{ form.username.errors.as_text }}</div>
                 {% endif %}
             </div>
 
             <div class="form-group">
-                <p style="font-size: 16px; font-weight: bold; border-left: solid 5px #7db4e6; padding: 0.25em 0.5em; margin: 20px 0px 5px -10px; background: #c2edff;">
+                <p class="title-label">
                     <label for="id_address" class="form-label">メールアドレス</label>
                 </p>
                 {{ form.address }}
                 {% if form.address.errors %}
-                    <div style="color:red;">{{ form.address.errors.as_text }}</div>
+                    <div class="error-message">{{ form.address.errors.as_text }}</div>
                 {% endif %}
             </div>
 
             <div class="form-group">
-                <p style="font-size: 16px; font-weight: bold; border-left: solid 5px #7db4e6; padding: 0.25em 0.5em; margin: 20px 0px 5px -10px; background: #c2edff;">
+                <p class="title-label">
                     <label for="id_password" class="form-label">パスワード</label>
                 </p>
                 {{ form.password }}
                 {% if form.password.errors %}
-                    <div style="color:red;">{{ form.password.errors.as_text }}</div>
+                    <div class="error-message">{{ form.password.errors.as_text }}</div>
                 {% endif %}
             </div>
 
             <div class="form-group">
-                <p style="font-size: 16px; font-weight: bold; border-left: solid 5px #7db4e6; padding: 0.25em 0.5em; margin: 20px 0px 5px -10px; background: #c2edff;">
+                <p class="title-label">
                     <label for="id_confirm_password" class="form-label">パスワード再入力</label>
                 </p>
                 {{ form.confirm_password }}
                 {% if form.confirm_password.errors %}
-                    <div style="color:red;">{{ form.confirm_password.errors.as_text }}</div>
+                    <div class="error-message">{{ form.confirm_password.errors.as_text }}</div>
                 {% endif %}
             </div>
 
-        <div style="display: flex; justify-content: center; margin: 20px 0px 0px 0px; align-items: center;">
+        <div class="button">
             <input type='submit' class="btn btn-primary" value="ユーザー登録">
         </div>
 </form>
 </div>
-{% endblock %}
 </body>
+{% endblock %}

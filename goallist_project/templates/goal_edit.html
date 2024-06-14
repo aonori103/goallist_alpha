@@ -1,44 +1,46 @@
 {% extends 'base.html' %}
+{% load static %}
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
 
-<body>
 {% block content %}
+<body class="background-detail">
 <div style="margin: 0 auto; max-width: 800px;">
 
-    <h1 style="font-size: 28px; font-weight: bold; border-bottom: double 4px; margin: 20px; padding: 20px; display: flex; justify-content: center; align-items: center;">夢を編集する</h1>
+    <h1 class="page-title">夢を編集する</h1>
 
     <form method='POST' enctype='multipart/form-data' style="max-width:300px; margin:auto" class="needs-validation" novalidate>
     {% csrf_token %}
 
             <div class="form-group">
-                <p style="font-size: 16px; font-weight: bold; border-left: solid 5px #7db4e6; padding: 0.25em 0.5em; margin: 20px 0px 5px -10px; background: #c2edff;">
+                <p class="title-label">
                     <label for="id_goal_title" class="form-label">叶えたい夢</label>
                 </p>
                 {{ form.goal_title }}
                 {% if form.goal_title.errors %}
-                    <div style="color:red;">{{ form.goal_title.errors.as_text }}</div>
+                    <div class="error-message">{{ form.goal_title.errors.as_text }}</div>
                 {% endif %}
             </div>
             <p id="passwordHelpBlock" class="form-text">{{ form.goal_title.help_text }}</p>
 
             <div class="form-group">
-                <p style="font-size: 16px; font-weight: bold; border-left: solid 5px #7db4e6; padding: 0.25em 0.5em; margin: 20px 0px 5px -10px; background: #c2edff;">
+                <p class="title-label">
                     <label for="id_goal_detail" class="form-label">夢の詳細</label>
                 </p>
                 {{ form.goal_detail }}
             </div>
             <p id="passwordHelpBlock" class="form-text">{{ form.goal_detail.help_text }}</p>
 
-        <div style="display: flex; justify-content: center; margin: 20px 0px 0px 0px; align-items: center;">
+        <div class="button">
             <input type='submit' class="btn btn-success" value="変更">
         </div>
     </form>
 </div>
-        <div style="display: flex; justify-content: center; align-items: center; margin: 40px 0px 40px 0px;">
-            <a class="btn btn-light" href="{% url 'accounts:goal_list' pk=user.id %}">リストへ戻る</a>
+<div class="button-home">
+    <a class="btn btn-light" href="{% url 'accounts:goal_list' pk=user.id %}">リストへ戻る</a>
 </div>
-{% endblock %}
 </body>
+{% endblock %}
